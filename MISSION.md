@@ -5,7 +5,12 @@
 ### Objective
 Build a SQLite database that permanently stores discarded movies and prevents them from being recommended again.
 
----
+--- 
+## Instructions for at school
+1. Go to school
+2. Clone/pull the repo
+3. Run python database.py to recreate the database locally (since .db files are ignored by git, which is correct)
+4. Continue working on Part 2 of the Mission (turning that script into functions) 
 
 ## 📋 TODO List
 
