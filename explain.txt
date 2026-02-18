@@ -1,0 +1,19 @@
+create_connection:
+ 1, the fucnction connects or maybe creates a db
+ 2, to handle errors
+ 3, conn, to get the db_file maybe
+
+create_table:
+  1, the function creates tables inside the db
+  2, to handle errors
+  3, nothing cause it creates not gives output
+
+discard_movie:
+ 1, it saves movies id and title that are discarded maybe in another table IDK
+ 2, to handle errors
+ 3, nothing it kind of functios like create_table
+
+get_discarded_movies:
+ 1, to get the movies from the discard_movie
+ 2, to handle errors IDK what more to say about this
+ 3, the movies that are saved in discard_movie
