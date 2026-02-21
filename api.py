@@ -1,8 +1,9 @@
 from fastapi import FastAPI
-from main import fetch_movie_by_title
 import sqlite3
 from database import is_movie_discarded, get_discarded_movies as db_get_discarded, discard_movie as db_discard_movie, create_table
 from pydantic import BaseModel
+from movies_data import VIBE_LISTS, get_random_movie
+from main import fetch_movie_by_ID
 
 class Movie(BaseModel):
     movie_id: str
@@ -18,9 +19,24 @@ app = FastAPI()
 def home():
     return {"message": "Hello World?"}
 
-@app.get("/recommend/")
-def get_movie(title: str):
-    return fetch_movie_by_title(title=title)
+@app.get("/recommend/vibes")
+def get_movie(vibes: str = "random"):
+    if vibes not in VIBE_LISTS:
+        return {"message": "Vibe not found"}
+    
+    # Extract just the IDs from the database result tuples [(id, title), ...]
+    discarded_list = db_get_discarded(conn)
+    discarded_ids = [row[0] for row in discarded_list] if discarded_list else []
+    
+    movie_id = get_random_movie(vibes, discarded_ids)
+    
+    if not movie_id:
+        return {"message": "No more movies in this vibe! Try another one."}
+        
+    movie_details = fetch_movie_by_ID(movie_id)
+    return {"movie_id": movie_id, "movie_details": movie_details}
+    
+    
 
 @app.post("/discard/")
 def discard_movie_endpoint(movie: Movie):
