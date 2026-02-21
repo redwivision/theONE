@@ -222,6 +222,74 @@ VIBE_LISTS = {
         "tt5705972",  # Dark
         "tt11280740", # Severance
     ],
+
+    "mindgame": [
+        "tt0482571",  # The Prestige (2006)
+        "tt2267998",  # Gone Girl (2014)
+        "tt0454848",  # Inside Man (2006)
+        "tt0240772",  # Ocean's Eleven (2001)
+        "tt0137523",  # Fight Club (1999)
+        "tt3460252",  # The Hateful Eight (2015)
+        "tt0114814",  # The Usual Suspects (1995)
+        "tt0264044",  # Catch Me If You Can (2002)
+        "tt6751668",  # Parasite (2019)
+        "tt8946378",  # Knives Out (2019)
+        # TV Shows
+        "tt0877079",  # Death Note
+        "tt10795658", # Alice in Borderland
+        "tt10919420", # Squid Game
+        "tt6468322",  # Money Heist
+        "tt1475582",  # Sherlock
+        "tt10048342", # The Queen's Gambit
+        "tt0455275",  # Prison Break
+        "tt7016922",  # Killing Eve
+        "tt4158110",  # Mr. Robot
+        "tt3032476",  # Better Call Saul
+    ],
+
+    "masterpiece": [
+        "tt0111161",  # The Shawshank Redemption (1994)
+        "tt0068646",  # The Godfather (1972)
+        "tt0468569",  # The Dark Knight (2008)
+        "tt0108052",  # Schindler's List (1993)
+        "tt0050083",  # 12 Angry Men (1957)
+        "tt0071562",  # The Godfather Part II (1974)
+        "tt0167260",  # LOTR: The Return of the King (2003)
+        "tt0110912",  # Pulp Fiction (1994)
+        "tt0060196",  # The Good, the Bad and the Ugly (1966)
+        "tt0109830",  # Forrest Gump (1994)
+        "tt0137523",  # Fight Club (1999)
+        "tt1375666",  # Inception (2010)
+        "tt0080684",  # Star Wars: Episode V - The Empire Strikes Back (1980)
+        "tt0133093",  # The Matrix (1999)
+        "tt0099685",  # Goodfellas (1990)
+        "tt0073486",  # One Flew Over the Cuckoo's Nest (1975)
+        "tt0114369",  # Se7en (1995)
+        "tt0047478",  # Seven Samurai (1954)
+        "tt0038650",  # It's a Wonderful Life (1946)
+        "tt0102926",  # The Silence of the Lambs (1991)
+        # TV Shows
+        "tt0903747",  # Breaking Bad
+        "tt0306414",  # The Wire
+        "tt0141842",  # The Sopranos
+        "tt0944947",  # Game of Thrones
+        "tt8162467",  # Chernobyl
+        "tt0417299",  # Avatar: The Last Airbender
+        "tt1475582",  # Sherlock
+        "tt7660850",  # Succession
+        "tt0386676",  # The Office
+        "tt3032476",  # Better Call Saul
+        "tt0804538",  # Mad Men
+        "tt3398228",  # BoJack Horseman
+        "tt5687612",  # Fleabag
+        "tt2699128",  # The Leftovers
+        "tt0098936",  # Twin Peaks
+        "tt0185906",  # Band of Brothers
+        "tt0303461",  # Firefly
+        "tt10986410", # Ted Lasso
+        "tt14452776", # The Bear
+        "tt5705972",  # Dark
+    ],
 }
 
 def get_random_movie(vibe, discarded_ids):
