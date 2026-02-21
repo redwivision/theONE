@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import sqlite3
-from database import is_movie_discarded, get_discarded_movies as db_get_discarded, discard_movie as db_discard_movie, create_table, remove_from_dicarded as db_remove_from_dicarded
+from database import is_movie_discarded, get_discarded_movies as db_get_discarded, discard_movie as db_discard_movie, create_table, remove_from_discarded as db_remove_from_discarded
 from pydantic import BaseModel
 from movies_data import VIBE_LISTS, get_random_movie
 from main import fetch_movie_by_ID
@@ -11,7 +11,8 @@ class Movie(BaseModel):
 
 conn = sqlite3.connect('movies.db', check_same_thread=False)
 # Initialize the table when the server starts
-create_table(conn, "CREATE TABLE IF NOT EXISTS discarded_movies (id TEXT PRIMARY KEY, title TEXT)")
+create_table(conn, "CREATE TABLE IF NOT EXISTS discards (id TEXT PRIMARY KEY, title TEXT)")
+
 app = FastAPI()
 
 
@@ -34,6 +35,21 @@ def get_movie(vibes: str = "random"):
         return {"message": "No more movies in this vibe! Try another one."}
         
     movie_details = fetch_movie_by_ID(movie_id)
+    
+    # Senior Fix: If the movie is broken, keep trying different ones
+    bad_ids = []
+    retries = 0
+    while movie_details.get("Response") == "False" and retries < 10:
+        bad_ids.append(movie_id)
+        movie_id = get_random_movie(vibes, discarded_ids + bad_ids)
+        if not movie_id:
+            break
+        movie_details = fetch_movie_by_ID(movie_id)
+        retries += 1
+
+    if movie_details.get("Response") == "False":
+        return {"message": "Could not find a valid movie. Please check your data or API key."}
+    
     return {"movie_id": movie_id, "movie_details": movie_details}
     
     
@@ -51,9 +67,11 @@ def discarded_movies_endpoint():
     return db_get_discarded(conn)
 
 @app.delete("/discard/{movie_id}")
-def remove_from_dicarded_endpoint(movie_id: str):
+def remove_from_discarded_endpoint(movie_id: str):
     if not is_movie_discarded(conn, movie_id):
         return {"message": "Movie not found in discarded list"}
     else:
-        db_remove_from_dicarded(conn, movie_id)
-        return {"message": "Movie removed from discarded list successfully"}
+        if db_remove_from_discarded(conn, movie_id):
+            return {"message": "Movie removed from discarded list successfully"}
+        else:
+            return {"message": "Failed to remove movie from discarded list"}
