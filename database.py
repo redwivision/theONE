@@ -41,6 +41,14 @@ def is_movie_discarded(conn, movie_id):
         print(e)
         return False
 
+def remove_from_dicarded(conn, movie_id):
+    try:
+        c = conn.cursor()
+        c.execute("DELETE FROM discarded_movies WHERE id = ?", (movie_id,))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(e)
+
 
 if __name__ == "__main__":
     conn = create_connection('movies.db')

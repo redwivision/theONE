@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import sqlite3
-from database import is_movie_discarded, get_discarded_movies as db_get_discarded, discard_movie as db_discard_movie, create_table
+from database import is_movie_discarded, get_discarded_movies as db_get_discarded, discard_movie as db_discard_movie, create_table, remove_from_dicarded as db_remove_from_dicarded
 from pydantic import BaseModel
 from movies_data import VIBE_LISTS, get_random_movie
 from main import fetch_movie_by_ID
@@ -49,3 +49,11 @@ def discard_movie_endpoint(movie: Movie):
 @app.get("/discarded/")
 def discarded_movies_endpoint():
     return db_get_discarded(conn)
+
+@app.delete("/discard/{movie_id}")
+def remove_from_dicarded_endpoint(movie_id: str):
+    if not is_movie_discarded(conn, movie_id):
+        return {"message": "Movie not found in discarded list"}
+    else:
+        db_remove_from_dicarded(conn, movie_id)
+        return {"message": "Movie removed from discarded list successfully"}
