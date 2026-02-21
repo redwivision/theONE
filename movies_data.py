@@ -234,6 +234,16 @@ VIBE_LISTS = {
         "tt0264044",  # Catch Me If You Can (2002)
         "tt6751668",  # Parasite (2019)
         "tt8946378",  # Knives Out (2019)
+        "tt0119174",  # The Game (1997)
+        "tt0117381",  # Primal Fear (1996)
+        "tt0488120",  # Fracture (2007)
+        "tt0123755",  # Cube (1997)
+        "tt1127015",  # Exam (2009)
+        "tt1130884",  # Shutter Island (2010)
+        "tt0209144",  # Memento (2000)
+        "tt0361862",  # The Machinist (2004)
+        "tt0443543",  # The Illusionist (2006)
+        "tt0120768",  # The Negotiator (1998)
         # TV Shows
         "tt0877079",  # Death Note
         "tt10795658", # Alice in Borderland
@@ -245,6 +255,16 @@ VIBE_LISTS = {
         "tt7016922",  # Killing Eve
         "tt4158110",  # Mr. Robot
         "tt3032476",  # Better Call Saul
+        "tt2243973",  # Hannibal
+        "tt4270492",  # Billions
+        "tt2149175",  # The Americans
+        "tt1796960",  # Homeland
+        "tt1856010",  # House of Cards
+        "tt1196946",  # The Mentalist
+        "tt7660856",  # Succession
+        "tt1399664",  # The Night Manager
+        "tt1632701",  # Suits
+        "tt15671580", # Slow Horses
     ],
 
     "masterpiece": [
