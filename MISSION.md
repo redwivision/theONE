@@ -12,10 +12,10 @@
 
 ### 📋 Level 5.1 Challenge Tasks (Self-Driven)
 
-#### 1. The Model Debug (`models/movie.dart`)
-- **The Bug**: Your code thinks `movie_details` is a `List` (`[]`), but the backend sends a `Map` (`{}`).
-- **The Task**: Change `Movie.fromJson` to treat `movie_details` as a Map.
-- **Goal**: Access the fields directly like `json['movie_details']['Title']`.
+- **The Model Debug (`models/movie.dart`)**
+    - **The Bug**: Your code thinks `movie_details` is a List (`[]`), but the backend sends a Map (`{}`).
+    - **Mentor Note**: Keep an eye on that `movie_details` nesting. You'll need to decide if you want to keep two separate classes or flatten them into one for simplicity.
+    - **Goal**: Access the fields correctly (e.g., `json['movie_details']['Title']`).
 
 #### 2. The Service Refactor (`api_service.dart`)
 - **The Bug**: `HttpClient` is too low-level and hard to read.
