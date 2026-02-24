@@ -1,19 +1,27 @@
-create_connection:
- 1, the fucnction connects or maybe creates a db
- 2, to handle errors
- 3, conn, to get the db_file maybe
+🍕 THE MOVIE PIZZA PARTY (Project Summary) 🍕
 
-create_table:
-  1, the function creates tables inside the db
-  2, to handle errors
-  3, nothing cause it creates not gives output
+Imagine you are building the ultimate Movie Pizza Shop called "The One." Here is how it works:
 
-discard_movie:
- 1, it saves movies id and title that are discarded maybe in another table IDK
- 2, to handle errors
- 3, nothing it kind of functios like create_table
+1. THE KITCHEN (The Python Backend) 👨‍🍳
+This is where all the work happens. We have a Chef (FastAPI) who waits for orders. 
+- The Menu: We have lists of different "Vibes" (like Toppings!).
+- The Recipe Book (OMDB API): If the Chef doesn't know a movie, he calls the Big Movie Recipe Book to get the details.
+- The Trash Can (SQLite Database): If you say "I hate Pineapple pizza" (or a boring movie), the Chef remembers it and never makes it for you again.
 
-get_discarded_movies:
- 1, to get the movies from the discard_movie
- 2, to handle errors IDK what more to say about this
- 3, the movies that are saved in discard_movie
+2. THE DELIVERY APP (The Flutter Frontend) 📱
+This is the screen you hold in your hand! 
+- Right now, we just finished the "Phone Line."
+- We made a Pizza Box (The Movie Model). If the kitchen sends us a messy pile of cheese and crust, our box organizes it into "Title," "Year," and "Poster" so it looks nice.
+
+3. THE CONNECTION (The API Service) 📡
+This is the phone call between your App and the Kitchen. 
+- We just proved the phone line works! When you press a button, the kitchen tells the app which pizza is coming, and the app prints the name on the screen.
+
+STATION STATUS:
+- Kitchen: FINISHED & SMELLS GREAT! ✅
+- Phone Line: CONNECTED! ✅
+- App Face: WE ARE BUILDING THE BOXES NOW! 📦
+
+Next time you're back, we are going to start making the pizzas actually show up as pictures on the screen instead of just text!
+
+Now go eat some real pizza! 🍕🚀🏁
