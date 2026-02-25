@@ -4,51 +4,46 @@
 - **Levels 1-2:** API & Mastery
 - **Level 4:** Persistence Mastery
 - **Level 5.1:** The Data Bridge (Connection & Models) ✅
+- **Level 5.2:** The Card UI (Premium Design) ✅
 
 ---
 
-## ⚡ Current Mission: Level 5.2 - The Card UI
-**Objective:** Stop printing text to the console and start showing real visuals on a phone screen.
+## ⚡ Current Mission: Level 5.2.5 - The Code Audit
+**Why this matters before 5.3**: Level 5.3 requires writing back to the backend (Discard endpoint). If you don't know the backend, you can't debug what breaks.
 
-### 📋 Level 5.2 Challenge Tasks
+### 📋 The Audit Checklist
 
-#### 1. The Container: `lib/widgets/movie_card.dart`
-- Create a reusable widget that takes a `Movie` object.
-- **The Design**: It should display:
-    - The **Poster** (use `Image.network`).
-    - The **Title** (use a large, bold font).
-    - The **Year** (subtle text).
-- **The Goal**: A clean, premium-looking card.
+#### 1. Backend Audit (`api.py` + `database.py`)
+- **Trace the flow**: How does a request go from your phone → `api.py` → `database.py` → OMDB → back to your phone?
+- **Key questions to answer yourself** (no Google, just read the code):
+    - What does `@app.get("/recommend/vibes")` actually do line by line?
+    - What is `db: sqlite3.Connection = Depends(get_db)` doing in the function signature?
+    - What happens if OMDB returns `"Response": "False"`?
 
-#### 2. The Bridge to the UI
-- In `main.dart`, use your `ApiService` to fetch a movie when the app starts.
-- Store the results in a `Movie?` variable.
+#### 2. Flutter Audit (`main.dart` + `api_service.dart`)
+- **Trace the flow**: Button tap → `_refresh()` → `ApiService().getMovie()` → JSON → `Movie.fromJson()` → Card renders.
+- **Key questions:**
+    - Why is `_movieFuture` a `Future<Movie>` and not just a `Movie`?
+    - What does `setState()` actually do to the screen?
 
-#### 3. State & Loading
-- If the movie is null, show a **Loading Spinner** (`CircularProgressIndicator`).
-- If the movie is loaded, show your `MovieCard`.
+#### 3. The "One Sentence" Test
+For each file, write one sentence in your head (or in `explain.txt`) that answers: *"What is this file's single job?"*
 
 ---
 
-**Current Status:** Level 5.1 Complete | Level 5.2 Preparing  
-**Goal:** See a movie poster on your screen.
+## ⏭️ Next Stop: Level 5.3 - The Discard (Swipe)
+**After 5.2.5 is done:**
+- Wire the "Discard" button to the `/discard` POST endpoint.
+- Add a swipe gesture to the MovieCard.
+- Display a vibe selector.
 
 ---
 
 ## ☁️ School Work & Cloud Development
-If you're at school without the Flutter SDK, use these "Senior Workarounds" to keep coding:
-
 ### 1. GitHub Codespaces (Full Power)
 - Go to your Repo > Click **"<> Code"** > **"Codespaces"** > **"Create codespace on main"**.
-- It opens VS Code in your browser with everything ready.
 - **Backend**: Run `pip install -r requirements.txt` and `uvicorn api:app --reload`.
-- **Frontend**: You can edit and test Dart logic here.
 
 ### 2. Zapp.run (Visual UI Testing)
 - Go to [Zapp.run](https://zapp.run/).
-- Quickest way to see your `MovieCard` widget without any setup.
 - Copy/Paste your `models/` and `api_service.dart` to test logic in the browser.
-
----
-
-**Next Stop:** Level 5.3 - The Swipe Gestures.
