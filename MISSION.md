@@ -35,4 +35,20 @@
 
 ---
 
+## ☁️ School Work & Cloud Development
+If you're at school without the Flutter SDK, use these "Senior Workarounds" to keep coding:
+
+### 1. GitHub Codespaces (Full Power)
+- Go to your Repo > Click **"<> Code"** > **"Codespaces"** > **"Create codespace on main"**.
+- It opens VS Code in your browser with everything ready.
+- **Backend**: Run `pip install -r requirements.txt` and `uvicorn api:app --reload`.
+- **Frontend**: You can edit and test Dart logic here.
+
+### 2. Zapp.run (Visual UI Testing)
+- Go to [Zapp.run](https://zapp.run/).
+- Quickest way to see your `MovieCard` widget without any setup.
+- Copy/Paste your `models/` and `api_service.dart` to test logic in the browser.
+
+---
+
 **Next Stop:** Level 5.3 - The Swipe Gestures.
