@@ -91,9 +91,9 @@ THE LAYOUT (build method):
 
   Row (the header): Two things side by side.
     LEFT: The Type Badge.
-      - We check: is details.type == 'series'? 
-      - If yes, show a purple badge that says "📺 SERIES."
-      - If no, show a pink badge that says "🎬 MOVIE."
+      - We check: is details.type == 'series'?
+      - If yes, show a purple badge that says "SERIES."
+      - If no, show a pink badge that says "MOVIE."
     RIGHT: Duration + Refresh button.
       - isSeries? Show "X Season(s)". Otherwise show runtime (e.g., "142 min").
       - GestureDetector: Wraps the refresh icon. When you tap it, it calls
@@ -109,10 +109,10 @@ THE LAYOUT (build method):
   Divider: A subtle horizontal line.
   Text (plot): The story summary in light grey.
 
-THE KEY LESSON: 
+THE KEY LESSON:
   The card doesn't DO anything by itself. It just DISPLAYS. The engine
   (main.dart + ApiService) does all the work. This separation is called
-  "Single Responsibility Principle." Each piece has one job. 🏆
+  "Single Responsibility Principle." Each piece has one job.
 
 
 ================================================
@@ -125,3 +125,56 @@ THE KEY LESSON:
   App Screen:  LIVE ON YOUR SAMSUNG ✅
 
 Next Mission: Level 5.3 — Swipe Gestures (Like/Discard)
+
+
+================================================
+ BONUS: FLUTTER CONCEPTS CHEAT SHEET
+ (Read this when the syntax feels alien)
+================================================
+
+CONCEPT 1: factory constructor
+  Normal constructor: creates an object directly.
+  Factory constructor: allowed to DO STUFF first (like parse JSON),
+  THEN create and return the object.
+  Pizza analogy: the factory chef receives raw ingredients (json), unpacks
+  them, assembles the box, and returns it. A normal chef just takes
+  a ready-made item.
+
+CONCEPT 2: Future<Movie>
+  A Future is a PIZZA TICKET. You don't have the pizza yet.
+  You have a promise that one is coming. Future<Movie> = a ticket that
+  promises a Movie will arrive. The app keeps running while it waits.
+  You need this because internet calls take time — you can't freeze the
+  whole screen while waiting for the network.
+
+CONCEPT 3: StatefulWidget vs StatelessWidget
+  StatelessWidget: A painting. Never changes after drawn.
+  StatefulWidget: A whiteboard. Can be erased and redrawn at any time.
+  HomePage is a whiteboard: it needs to remember which movie it's showing
+  and redraw the screen whenever the user refreshes.
+
+CONCEPT 4: setState()
+  The "erase and redraw" command for a StatefulWidget.
+  Step 1: Change a variable (e.g., swap _movieFuture for a new one).
+  Step 2: setState() tells Flutter "I changed something, redraw the screen."
+  Without it, you can change the data all day and the screen never updates.
+
+CONCEPT 5: initState()
+  A lifecycle method. Runs ONCE, right when the widget first appears.
+  Use it for "on startup" tasks like fetching the first movie.
+  Like a restaurant saying "start the ovens" before any customers arrive.
+
+CONCEPT 6: FutureBuilder<Movie>
+  A special Flutter widget that watches a Future ticket.
+  It automatically handles 3 states:
+    - Waiting (ticket not ready) → show a loading spinner
+    - Error (kitchen caught fire) → show error message + Retry button
+    - Done (pizza arrived!)     → show the MovieCard with real data
+
+CONCEPT 7: VoidCallback (onRefresh)
+  A type that means: "a function that takes no arguments and returns nothing."
+  Like a button slot on a TV remote. The card doesn't know what happens
+  when pressed — it just presses it. main.dart plugs in _refresh().
+  This is called "Separation of Concerns":
+    - The card DISPLAYS. That's its only job.
+    - main.dart DRIVES. That's its only job.
