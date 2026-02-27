@@ -236,30 +236,48 @@ VIBE_LISTS = {
     ],
 
     "random": [
-        "tt0111161",  # The Shawshank Redemption (1994)
-        "tt0068646",  # The Godfather (1972)
-        "tt0468569",  # The Dark Knight (2008)
-        "tt1375666",  # Inception (2010)
-        "tt0110912",  # Pulp Fiction (1994)
-        "tt0133093",  # The Matrix (1999)
-        "tt0816692",  # Interstellar (2014)
-        "tt0109830",  # Forrest Gump (1994)
-        "tt0050083",  # 12 Angry Men (1957)
-        "tt0108052",  # Schindler's List (1993)
-        "tt0076759",  # Star Wars: A New Hope (1977)
-        "tt0120815",  # Saving Private Ryan (1998)
-        "tt0245429",  # Spirited Away (2001)
-        "tt0470752",  # Ex Machina (2014)
-        "tt0114369",  # Se7en (1995)
-        # Random TV Shows
-        "tt0903747",  # Breaking Bad
-        "tt0944947",  # Game of Thrones
-        "tt0386676",  # The Office
-        "tt2852451",  # Rick and Morty
-        "tt1190634",  # The Boys
-        "tt4574334",  # Stranger Things
-        "tt5705972",  # Dark
-        "tt11280740", # Severance
+        # 20 Movies — Different genres, eras & cultures
+        "tt0082096",  # Das Boot (1981) — German WWII submarine
+        "tt0095327",  # Grave of the Fireflies (1988) — Animated war tragedy
+        "tt1853728",  # Django Unchained (2012) — Tarantino western
+        "tt0477348",  # No Country for Old Men (2007) — Coen Bros masterpiece
+        "tt0317248",  # City of God (2002) — Brazilian crime epic
+        "tt0088763",  # Back to the Future (1985) — Iconic sci-fi comedy
+        "tt7286456",  # Joker (2019) — Dark character study
+        "tt0105695",  # Unforgiven (1992) — Clint Eastwood western
+        "tt0268978",  # A Beautiful Mind (2001) — Biopic drama
+        "tt0118715",  # The Big Lebowski (1998) — Cult comedy
+        "tt3783958",  # La La Land (2016) — Musical romance
+        "tt0993846",  # The Wolf of Wall Street (2013) — Scorsese crime-comedy
+        "tt0056592",  # To Kill a Mockingbird (1962) — American classic
+        "tt0047478",  # Seven Samurai (1954) — Japanese cinema legend
+        "tt0253474",  # The Pianist (2002) — WWII survival drama
+        "tt2267998",  # Gone Girl (2014) — Psychological thriller
+        "tt0325980",  # Pirates of the Caribbean (2003) — Adventurous fun
+        "tt1219289",  # Limitless (2011) — Sci-fi thriller
+        "tt4154796",  # Avengers: Endgame (2019) — Epic superhero conclusion
+        "tt0096283",  # My Neighbor Totoro (1988) — Ghibli classic
+        # 20 TV Shows — Diverse styles & tones
+        "tt2356777",  # True Detective (Season 1) — Crime anthology
+        "tt2707408",  # Narcos — Colombian drug war
+        "tt3398228",  # BoJack Horseman — Animated existential comedy
+        "tt10048342", # The Queen's Gambit — Chess prodigy miniseries
+        "tt5387792",  # Lucifer — Supernatural crime comedy
+        "tt3581920",  # The Last of Us — Post-apocalyptic masterpiece
+        "tt0455275",  # Prison Break — Escape thriller
+        "tt1856010",  # House of Cards — Political chess game
+        "tt4270492",  # Billions — Finance power struggle
+        "tt2149175",  # The Americans — Cold War spy drama
+        "tt0460681",  # Supernatural — Long-running cult horror
+        "tt5290382",  # Mindhunter — FBI serial killer profiling
+        "tt3322740",  # Daredevil — Dark Marvel street-level action
+        "tt3566834",  # Master of None — Aziz Ansari's indie gem
+        "tt6468322",  # Money Heist (La Casa de Papel) — Spanish heist drama
+        "tt5705972",  # Dark — German time-loop sci-fi
+        "tt0096697",  # The Simpsons — Cultural institution
+        "tt2085059",  # Black Mirror — Tech horror anthology
+        "tt7660850",  # Succession — Family power drama
+        "tt14452776", # The Bear — High-intensity kitchen drama
     ],
 
     "mindgame": [
