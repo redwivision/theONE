@@ -26,6 +26,12 @@ VIBE_LISTS = {
         "tt2261227",  # Altered Carbon
         "tt2852451",  # Rick and Morty
         "tt8111088",  # The Mandalorian
+        # Anime
+        "tt0112159",  # Neon Genesis Evangelion
+        "tt2560140",  # Sword Art Online
+        "tt2098220",  # Psycho-Pass
+        "tt5677890",  # Re:Zero
+        "tt4508902",  # One Punch Man
     ],
 
     "thriller": [
@@ -50,6 +56,10 @@ VIBE_LISTS = {
         "tt5875444",  # Slow Horses
         "tt6748928",  # You
         "tt1475582",  # Sherlock
+        # Anime
+        "tt0877079",  # Death Note
+        "tt0421063",  # Monster
+        "tt2098220",  # Psycho-Pass
     ],
 
     "comedy": [
@@ -74,6 +84,10 @@ VIBE_LISTS = {
         "tt2467372",  # Brooklyn Nine-Nine
         "tt0098904",  # Seinfeld
         "tt0472954",  # It's Always Sunny in Philadelphia
+        # Anime
+        "tt0466872",  # Gintama
+        "tt0388629",  # One Piece (has plenty of comedy arcs)
+        "tt10145574", # Konosuba
     ],
 
     "drama": [
@@ -98,6 +112,11 @@ VIBE_LISTS = {
         "tt4786824",  # The Crown
         "tt3032476",  # Better Call Saul
         "tt2442760",  # Peaky Blinders
+        # Anime
+        "tt7144274",  # Vinland Saga
+        "tt0421063",  # Monster
+        "tt0226732",  # Cowboy Bebop
+        "tt0274620",  # Hajime no Ippo
     ],
 
     "action": [
@@ -122,6 +141,17 @@ VIBE_LISTS = {
         "tt5675620",  # The Punisher
         "tt2193021",  # Arrow
         "tt7221388",  # Cobra Kai
+        # Anime
+        "tt2560140",  # Sword Art Online (SAO)
+        "tt7144078",  # Mob Psycho 100
+        "tt5646124",  # My Hero Academia
+        "tt10565236", # Demon Slayer: Kimetsu no Yaiba
+        "tt3741634",  # Attack on Titan
+        "tt0494494",  # Gurren Lagann
+        "tt0388629",  # One Piece
+        "tt0409591",  # Naruto
+        "tt4508902",  # One Punch Man
+        "tt0315776",  # Fullmetal Alchemist: Brotherhood
     ],
 
     "horror": [
@@ -146,6 +176,10 @@ VIBE_LISTS = {
         "tt12921966", # Archive 81
         "tt5473358",  # Channel Zero
         "tt9813792",  # From
+        # Anime
+        "tt0479005",  # Elfen Lied
+        "tt1315888",  # Tokyo Ghoul
+        "tt0112159",  # Neon Genesis Evangelion (psychological horror)
     ],
 
     "romance": [
@@ -194,6 +228,11 @@ VIBE_LISTS = {
         "tt13016376", # 3 Body Problem
         "tt0475784",  # Westworld
         "tt4158110",  # Mr. Robot
+        # Anime
+        "tt2406750",  # Steins;Gate
+        "tt0112159",  # Neon Genesis Evangelion
+        "tt0421063",  # Monster
+        "tt1966421",  # Fullmetal Alchemist (2003 — thematically heavy)
     ],
 
     "random": [
@@ -265,6 +304,12 @@ VIBE_LISTS = {
         "tt1399664",  # The Night Manager
         "tt1632701",  # Suits
         "tt15671580", # Slow Horses
+        # Anime
+        "tt0877079",  # Death Note (already above, anchor)
+        "tt0475565",  # Code Geass
+        "tt2406750",  # Steins;Gate
+        "tt2098220",  # Psycho-Pass
+        "tt5677890",  # Re:Zero
     ],
 
     "masterpiece": [
@@ -309,6 +354,57 @@ VIBE_LISTS = {
         "tt10986410", # Ted Lasso
         "tt14452776", # The Bear
         "tt5705972",  # Dark
+        # Anime
+        "tt0315776",  # Fullmetal Alchemist: Brotherhood
+        "tt0226732",  # Cowboy Bebop
+        "tt7144274",  # Vinland Saga
+        "tt2406750",  # Steins;Gate
+        "tt0421063",  # Monster
+        "tt3741634",  # Attack on Titan
+    ],
+
+    "anime": [
+        # The 40 Greatest Anime of All Time
+        "tt0315776",  # Fullmetal Alchemist: Brotherhood
+        "tt0877079",  # Death Note
+        "tt3741634",  # Attack on Titan (Shingeki no Kyojin)
+        "tt0226732",  # Cowboy Bebop
+        "tt0112159",  # Neon Genesis Evangelion
+        "tt2406750",  # Steins;Gate
+        "tt7144274",  # Vinland Saga
+        "tt0421063",  # Monster
+        "tt2098220",  # Psycho-Pass
+        "tt4508902",  # One Punch Man
+        "tt0475565",  # Code Geass
+        "tt7144078",  # Mob Psycho 100
+        "tt5677890",  # Re:Zero - Starting Life in Another World
+        "tt0274620",  # Hajime no Ippo
+        "tt0494494",  # Gurren Lagann (Tengen Toppa)
+        "tt0388629",  # One Piece
+        "tt5646124",  # My Hero Academia
+        "tt10565236", # Demon Slayer: Kimetsu no Yaiba
+        "tt0409591",  # Naruto
+        "tt1315888",  # Tokyo Ghoul
+        "tt0266806",  # Samurai Champloo
+        "tt0210234",  # Hunter x Hunter
+        "tt0318842",  # Bleach
+        "tt0479005",  # Elfen Lied
+        "tt1966421",  # Fullmetal Alchemist (2003)
+        "tt1555149",  # Black Clover
+        "tt5923370",  # Dororo
+        "tt0245429",  # Spirited Away (film)
+        "tt0347149",  # Howl's Moving Castle (film)
+        "tt0087781",  # Nausicaa of the Valley of Wind (film)
+        "tt3741634",  # AoT Season 1 (same ID, different seasons on platform)
+        "tt2085059",  # (placeholder — skip if already seen)
+        "tt0466872",  # Gintama
+        "tt10145574", # Konosuba
+        "tt5923054",  # Made in Abyss
+        "tt6586546",  # JoJo's Bizarre Adventure
+        "tt5646124",  # MHA Season 1
+        "tt2098220",  # Psycho-Pass Season 2
+        "tt0364204",  # Basilisk
+        "tt0278237",  # InuYasha
     ],
 }
 
