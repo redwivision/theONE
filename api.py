@@ -15,7 +15,6 @@ create_table(conn, "CREATE TABLE IF NOT EXISTS discards (id TEXT PRIMARY KEY, ti
 
 app = FastAPI()
 
-
 @app.get("/")
 def home():
     return {"message": "Hello World?"}
@@ -54,13 +53,17 @@ def get_movie(vibes: str = "random"):
     
     
 
-@app.post("/discard/")
-def discard_movie_endpoint(movie: Movie):
-    if is_movie_discarded(conn, movie_id=movie.movie_id):
+@app.post("/discard/{movie_id}")
+def discard_movie_endpoint(movie_id: str):
+    if is_movie_discarded(conn, movie_id):
         return {"message": "Movie already discarded"}
     else:
-        db_discard_movie(conn, movie.movie_id, movie.title)
-        return {"message": "Movie discarded successfully"}
+        # Mentor Fix: Fetch the real title from OMDb so the list looks premium!
+        details = fetch_movie_by_ID(movie_id)
+        title = details.get("Title", f"Unknown ({movie_id})")
+        
+        db_discard_movie(conn, movie_id, title)
+        return {"message": "Movie discarded successfully", "title": title}
 
 @app.get("/discarded/")
 def discarded_movies_endpoint():

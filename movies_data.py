@@ -11,12 +11,12 @@ VIBE_LISTS = {
         "tt0470752",  # Ex Machina (2014)
         "tt0083658",  # Blade Runner (1982)
         "tt1856101",  # Blade Runner 2049 (2017)
-        "tt0076759",  # Star Wars: A New Hope (1977)
+        "tt13550692",  # Star Wars: A New Hope (1977)
         "tt0107290",  # Jurassic Park (1993)
-        "tt0367882",  # I Am Legend (2007)
+        "tt0480249",  # I Am Legend (2007)
         "tt1454468",  # Gravity (2013)
         # TV Shows
-        "tt5705972",  # Dark
+        "tt5753856",  # Dark
         "tt3581920",  # The Last of Us
         "tt2085059",  # Black Mirror
         "tt0475784",  # Westworld
@@ -24,13 +24,13 @@ VIBE_LISTS = {
         "tt11280740", # Severance
         "tt4574334",  # Stranger Things
         "tt2261227",  # Altered Carbon
-        "tt2852451",  # Rick and Morty
+        "tt2861424",  # Rick and Morty
         "tt8111088",  # The Mandalorian
         # Anime
         "tt0112159",  # Neon Genesis Evangelion
-        "tt2560140",  # Sword Art Online
-        "tt2098220",  # Psycho-Pass
-        "tt5677890",  # Re:Zero
+        "tt2250192",  # Sword Art Online
+        "tt2379308",  # Psycho-Pass
+        "tt5607616",  # Re:Zero
         "tt4508902",  # One Punch Man
     ],
 
@@ -54,12 +54,12 @@ VIBE_LISTS = {
         "tt0285331",  # 24
         "tt1474684",  # Luther
         "tt5875444",  # Slow Horses
-        "tt6748928",  # You
+        "tt7335184",  # You
         "tt1475582",  # Sherlock
         # Anime
-        "tt0877079",  # Death Note
-        "tt0421063",  # Monster
-        "tt2098220",  # Psycho-Pass
+        "tt0877057",  # Death Note
+        "tt13207736",  # Monster
+        "tt2379308",  # Psycho-Pass
     ],
 
     "comedy": [
@@ -69,25 +69,25 @@ VIBE_LISTS = {
         "tt0435761",  # Toy Story 3 (2010)
         "tt2096673",  # Inside Out (2015)
         "tt0382932",  # Ratatouille (2007)
-        "tt0910970",  # WALL-E (2008)
+        "tt20453422",  # WALL-E (2008)
         "tt0114709",  # Toy Story (1995)
         "tt0245429",  # Spirited Away (2001)
         "tt0088763",  # Back to the Future (1985)
         # TV Shows
         "tt0108778",  # Friends
         "tt0386676",  # The Office
-        "tt2852451",  # Rick and Morty
+        "tt2861424",  # Rick and Morty
         "tt10986410", # Ted Lasso
         "tt5687612",  # Fleabag
-        "tt5221942",  # The Good Place
+        "tt4955642",  # The Good Place
         "tt1266020",  # Parks and Recreation
         "tt2467372",  # Brooklyn Nine-Nine
         "tt0098904",  # Seinfeld
         "tt0472954",  # It's Always Sunny in Philadelphia
         # Anime
-        "tt0466872",  # Gintama
+        "tt0988818",  # Gintama
         "tt0388629",  # One Piece (has plenty of comedy arcs)
-        "tt10145574", # Konosuba
+        "tt5370118",  # Konosuba
     ],
 
     "drama": [
@@ -102,29 +102,29 @@ VIBE_LISTS = {
         "tt0120689",  # The Green Mile (1999)
         "tt0112573",  # Braveheart (1995)
         # TV Shows
-        "tt8162467",  # Chernobyl
+        "tt7366338",  # Chernobyl
         "tt0306414",  # The Wire
         "tt0141842",  # The Sopranos
         "tt0944947",  # Game of Thrones
         "tt0903747",  # Breaking Bad
         "tt7660850",  # Succession
-        "tt0804538",  # Mad Men
+        "tt0804503",  # Mad Men
         "tt4786824",  # The Crown
         "tt3032476",  # Better Call Saul
-        "tt2442760",  # Peaky Blinders
+        "tt2442560",  # Peaky Blinders
         # Anime
-        "tt7144274",  # Vinland Saga
-        "tt0421063",  # Monster
-        "tt0226732",  # Cowboy Bebop
-        "tt0274620",  # Hajime no Ippo
+        "tt10233448",  # Vinland Saga
+        "tt13207736",  # Monster
+        "tt0213338",  # Cowboy Bebop
+        "tt0290223",  # Hajime no Ippo
     ],
 
     "action": [
         "tt0468569",  # The Dark Knight (2008)
-        "tt0076759",  # Star Wars: A New Hope (1977)
+        "tt13550692",  # Star Wars: A New Hope (1977)
         "tt0120815",  # Saving Private Ryan (1998)
         "tt0110413",  # Léon: The Professional (1994)
-        "tt0103074",  # Terminator 2: Judgment Day (1991)
+        "tt0103064",  # Terminator 2: Judgment Day (1991)
         "tt0372784",  # Batman Begins (2005)
         "tt0167260",  # LOTR: Return of the King (2003)
         "tt0120737",  # LOTR: Fellowship of the Ring (2001)
@@ -134,31 +134,31 @@ VIBE_LISTS = {
         "tt1190634",  # The Boys
         "tt9288030",  # Reacher
         "tt1839578",  # Person of Interest
-        "tt2019451",  # Banshee
+        "tt2017109",  # Banshee
         "tt2741602",  # The Blacklist
-        "tt5638432",  # Jack Ryan
-        "tt3322740",  # Daredevil
+        "tt5057054",  # Jack Ryan
+        "tt3322312",  # Daredevil
         "tt5675620",  # The Punisher
         "tt2193021",  # Arrow
         "tt7221388",  # Cobra Kai
         # Anime
-        "tt2560140",  # Sword Art Online (SAO)
-        "tt7144078",  # Mob Psycho 100
-        "tt5646124",  # My Hero Academia
-        "tt10565236", # Demon Slayer: Kimetsu no Yaiba
-        "tt3741634",  # Attack on Titan
-        "tt0494494",  # Gurren Lagann
+        "tt2250192",  # Sword Art Online (SAO)
+        "tt5897304",  # Mob Psycho 100
+        "tt5626028",  # My Hero Academia
+        "tt9335498",  # Demon Slayer: Kimetsu no Yaiba
+        "tt2250192",  # Attack on Titan
+        "tt0948103",  # Gurren Lagann
         "tt0388629",  # One Piece
         "tt0409591",  # Naruto
         "tt4508902",  # One Punch Man
-        "tt0315776",  # Fullmetal Alchemist: Brotherhood
+        "tt1355642",  # Fullmetal Alchemist: Brotherhood
     ],
 
     "horror": [
         "tt0081505",  # The Shining (1980)
         "tt0073195",  # Jaws (1975)
         "tt0054215",  # Psycho (1960)
-        "tt0087182",  # A Nightmare on Elm Street (1984)
+        "tt0087800",  # A Nightmare on Elm Street (1984)
         "tt0093773",  # Predator (1987)
         "tt7286456",  # Joker (2019)
         "tt0780504",  # Drive (2011)
@@ -166,42 +166,42 @@ VIBE_LISTS = {
         "tt0364569",  # Oldboy (2003)
         "tt1130884",  # Shutter Island (2010)
         # TV Shows
-        "tt1520261",  # The Walking Dead
+        "tt1520211",  # The Walking Dead
         "tt6763664",  # The Haunting of Hill House
         "tt1844624",  # American Horror Story
-        "tt2243973",  # Hannibal
+        "tt0212985",  # Hannibal
         "tt2628232",  # Penny Dreadful
         "tt10574558", # Midnight Mass
-        "tt11005132", # Yellowjackets
-        "tt12921966", # Archive 81
-        "tt5473358",  # Channel Zero
+        "tt11041332",  # Yellowjackets
+        "tt13365348",  # Archive 81
+        "tt4820370",  # Channel Zero
         "tt9813792",  # From
         # Anime
-        "tt0479005",  # Elfen Lied
-        "tt1315888",  # Tokyo Ghoul
+        "tt0480489",  # Elfen Lied
+        "tt2560140",  # Tokyo Ghoul
         "tt0112159",  # Neon Genesis Evangelion (psychological horror)
     ],
 
     "romance": [
         "tt0120338",  # Titanic (1997)
         "tt0109830",  # Forrest Gump (1994)
-        "tt0097216",  # When Harry Met Sally (1989)
+        "tt8377584",  # When Harry Met Sally (1989)
         "tt0245429",  # Spirited Away (2001)
-        "tt0910970",  # WALL-E (2008)
+        "tt20453422",  # WALL-E (2008)
         "tt2096673",  # Inside Out (2015)
         "tt0382932",  # Ratatouille (2007)
         "tt0266543",  # Finding Nemo (2003)
         "tt0435761",  # Toy Story 3 (2010)
         "tt1832382",  # A Separation (2011)
         # TV Shows
-        "tt9059744",  # Normal People
+        "tt9059760",  # Normal People
         "tt8740790",  # Bridgerton
         "tt3006802",  # Outlander
-        "tt10638068", # Heartstopper
-        "tt16253100", # One Day
+        "tt10638036",  # Heartstopper
+        "tt1563738",  # One Day
         "tt7767422",  # Sex Education
         "tt0413573",  # Grey's Anatomy
-        "tt9108056",  # Virgin River
+        "tt9077530",  # Virgin River
         "tt8962124",  # Emily in Paris
         "tt1606375",  # Downton Abbey
     ],
@@ -218,21 +218,21 @@ VIBE_LISTS = {
         "tt0407887",  # The Departed (2006)
         "tt0114369",  # Se7en (1995)
         # TV Shows
-        "tt5705972",  # Dark
+        "tt5753856",  # Dark
         "tt2085059",  # Black Mirror
         "tt11280740", # Severance
         "tt0411008",  # Lost
         "tt2699128",  # The Leftovers
         "tt0098936",  # Twin Peaks
         "tt8134186",  # Devs
-        "tt13016376", # 3 Body Problem
+        "tt13016388",  # 3 Body Problem
         "tt0475784",  # Westworld
         "tt4158110",  # Mr. Robot
         # Anime
-        "tt2406750",  # Steins;Gate
+        "tt1910272",  # Steins;Gate
         "tt0112159",  # Neon Genesis Evangelion
-        "tt0421063",  # Monster
-        "tt1966421",  # Fullmetal Alchemist (2003 — thematically heavy)
+        "tt13207736",  # Monster
+        "tt0421357",  # Fullmetal Alchemist (2003 — thematically heavy)
     ],
 
     "random": [
@@ -262,7 +262,7 @@ VIBE_LISTS = {
         "tt2707408",  # Narcos — Colombian drug war
         "tt3398228",  # BoJack Horseman — Animated existential comedy
         "tt10048342", # The Queen's Gambit — Chess prodigy miniseries
-        "tt5387792",  # Lucifer — Supernatural crime comedy
+        "tt4052886",  # Lucifer — Supernatural crime comedy
         "tt3581920",  # The Last of Us — Post-apocalyptic masterpiece
         "tt0455275",  # Prison Break — Escape thriller
         "tt1856010",  # House of Cards — Political chess game
@@ -270,10 +270,10 @@ VIBE_LISTS = {
         "tt2149175",  # The Americans — Cold War spy drama
         "tt0460681",  # Supernatural — Long-running cult horror
         "tt5290382",  # Mindhunter — FBI serial killer profiling
-        "tt3322740",  # Daredevil — Dark Marvel street-level action
-        "tt3566834",  # Master of None — Aziz Ansari's indie gem
+        "tt3322312",  # Daredevil — Dark Marvel street-level action
+        "tt4635276",  # Master of None — Aziz Ansari's indie gem
         "tt6468322",  # Money Heist (La Casa de Papel) — Spanish heist drama
-        "tt5705972",  # Dark — German time-loop sci-fi
+        "tt0468569",  # Dark — German time-loop sci-fi
         "tt0096697",  # The Simpsons — Cultural institution
         "tt2085059",  # Black Mirror — Tech horror anthology
         "tt7660850",  # Succession — Family power drama
@@ -288,46 +288,46 @@ VIBE_LISTS = {
         "tt0137523",  # Fight Club (1999)
         "tt3460252",  # The Hateful Eight (2015)
         "tt0114814",  # The Usual Suspects (1995)
-        "tt0264044",  # Catch Me If You Can (2002)
+        "tt0264464",  # Catch Me If You Can (2002)
         "tt6751668",  # Parasite (2019)
         "tt8946378",  # Knives Out (2019)
         "tt0119174",  # The Game (1997)
         "tt0117381",  # Primal Fear (1996)
         "tt0488120",  # Fracture (2007)
         "tt0123755",  # Cube (1997)
-        "tt1127015",  # Exam (2009)
+        "tt1258197",  # Exam (2009)
         "tt1130884",  # Shutter Island (2010)
         "tt0209144",  # Memento (2000)
         "tt0361862",  # The Machinist (2004)
         "tt0443543",  # The Illusionist (2006)
         "tt0120768",  # The Negotiator (1998)
         # TV Shows
-        "tt0877079",  # Death Note
+        "tt0877057",  # Death Note
         "tt10795658", # Alice in Borderland
         "tt10919420", # Squid Game
         "tt6468322",  # Money Heist
         "tt1475582",  # Sherlock
         "tt10048342", # The Queen's Gambit
         "tt0455275",  # Prison Break
-        "tt7016922",  # Killing Eve
+        "tt7016936",  # Killing Eve
         "tt4158110",  # Mr. Robot
         "tt3032476",  # Better Call Saul
-        "tt2243973",  # Hannibal
+        "tt0212985",  # Hannibal
         "tt4270492",  # Billions
         "tt2149175",  # The Americans
         "tt1796960",  # Homeland
         "tt1856010",  # House of Cards
         "tt1196946",  # The Mentalist
-        "tt7660856",  # Succession
+        "tt7660850",  # Succession
         "tt1399664",  # The Night Manager
         "tt1632701",  # Suits
-        "tt15671580", # Slow Horses
+        "tt5875444",  # Slow Horses
         # Anime
-        "tt0877079",  # Death Note (already above, anchor)
-        "tt0475565",  # Code Geass
-        "tt2406750",  # Steins;Gate
-        "tt2098220",  # Psycho-Pass
-        "tt5677890",  # Re:Zero
+        "tt0877057",  # Death Note (already above, anchor)
+        "tt0994314",  # Code Geass
+        "tt1910272",  # Steins;Gate
+        "tt2379308",  # Psycho-Pass
+        "tt5607616",  # Re:Zero
     ],
 
     "masterpiece": [
@@ -356,13 +356,13 @@ VIBE_LISTS = {
         "tt0306414",  # The Wire
         "tt0141842",  # The Sopranos
         "tt0944947",  # Game of Thrones
-        "tt8162467",  # Chernobyl
+        "tt7366338",  # Chernobyl
         "tt0417299",  # Avatar: The Last Airbender
         "tt1475582",  # Sherlock
         "tt7660850",  # Succession
         "tt0386676",  # The Office
         "tt3032476",  # Better Call Saul
-        "tt0804538",  # Mad Men
+        "tt0804503",  # Mad Men
         "tt3398228",  # BoJack Horseman
         "tt5687612",  # Fleabag
         "tt2699128",  # The Leftovers
@@ -371,58 +371,57 @@ VIBE_LISTS = {
         "tt0303461",  # Firefly
         "tt10986410", # Ted Lasso
         "tt14452776", # The Bear
-        "tt5705972",  # Dark
+        "tt5753856",  # Dark
         # Anime
-        "tt0315776",  # Fullmetal Alchemist: Brotherhood
-        "tt0226732",  # Cowboy Bebop
-        "tt7144274",  # Vinland Saga
-        "tt2406750",  # Steins;Gate
-        "tt0421063",  # Monster
-        "tt3741634",  # Attack on Titan
+        "tt1355642",  # Fullmetal Alchemist: Brotherhood
+        "tt0213338",  # Cowboy Bebop
+        "tt10233448",  # Vinland Saga
+        "tt1910272",  # Steins;Gate
+        "tt13207736",  # Monster
+        "tt2250192",  # Attack on Titan
     ],
 
     "anime": [
-        # The 40 Greatest Anime of All Time
-        "tt0315776",  # Fullmetal Alchemist: Brotherhood
-        "tt0877079",  # Death Note
-        "tt3741634",  # Attack on Titan (Shingeki no Kyojin)
-        "tt0226732",  # Cowboy Bebop
+        # The 40 Greatest Anime of All Time (Verified IDs)
+        "tt1355642",  # Fullmetal Alchemist: Brotherhood
+        "tt0877057",  # Death Note
+        "tt2250192",  # Attack on Titan
+        "tt0213338",  # Cowboy Bebop
         "tt0112159",  # Neon Genesis Evangelion
-        "tt2406750",  # Steins;Gate
-        "tt7144274",  # Vinland Saga
-        "tt0421063",  # Monster
-        "tt2098220",  # Psycho-Pass
+        "tt1910272",  # Steins;Gate
+        "tt10233448",  # Vinland Saga
+        "tt13207736",  # Monster
+        "tt2379308",  # Psycho-Pass
         "tt4508902",  # One Punch Man
-        "tt0475565",  # Code Geass
-        "tt7144078",  # Mob Psycho 100
-        "tt5677890",  # Re:Zero - Starting Life in Another World
-        "tt0274620",  # Hajime no Ippo
-        "tt0494494",  # Gurren Lagann (Tengen Toppa)
+        "tt0994314",  # Code Geass
+        "tt5897304",  # Mob Psycho 100
+        "tt5607616",  # Re:Zero
+        "tt0290223",  # Hajime no Ippo
+        "tt0948103",  # Gurren Lagann
         "tt0388629",  # One Piece
-        "tt5646124",  # My Hero Academia
-        "tt10565236", # Demon Slayer: Kimetsu no Yaiba
+        "tt5626028",  # My Hero Academia
+        "tt0315465",  # Demon Slayer
         "tt0409591",  # Naruto
-        "tt1315888",  # Tokyo Ghoul
-        "tt0266806",  # Samurai Champloo
-        "tt0210234",  # Hunter x Hunter
-        "tt0318842",  # Bleach
-        "tt0479005",  # Elfen Lied
-        "tt1966421",  # Fullmetal Alchemist (2003)
-        "tt1555149",  # Black Clover
-        "tt5923370",  # Dororo
+        "tt2560140",  # Tokyo Ghoul
+        "tt0423731",  # Samurai Champloo
+        "tt2379308",  # Hunter x Hunter (1999)
+        "tt0434665",  # Bleach
+        "tt0480489",  # Elfen Lied
+        "tt0421357",  # Fullmetal Alchemist (2003)
+        "tt7441658",  # Black Clover
+        "tt9458304",  # Dororo
         "tt0245429",  # Spirited Away (film)
         "tt0347149",  # Howl's Moving Castle (film)
-        "tt0087781",  # Nausicaa of the Valley of Wind (film)
-        "tt3741634",  # AoT Season 1 (same ID, different seasons on platform)
-        "tt2085059",  # (placeholder — skip if already seen)
-        "tt0466872",  # Gintama
-        "tt10145574", # Konosuba
-        "tt5923054",  # Made in Abyss
-        "tt6586546",  # JoJo's Bizarre Adventure
-        "tt5646124",  # MHA Season 1
-        "tt2098220",  # Psycho-Pass Season 2
-        "tt0364204",  # Basilisk
-        "tt0278237",  # InuYasha
+        "tt0210193",  # Nausicaa (film)
+        "tt2560140",  # AoT Final Season
+        "tt2379308",  # Hunter x Hunter (2011)
+        "tt0988818",  # Gintama
+        "tt5370118",  # Konosuba
+        "tt7222086",  # Made in Abyss
+        "tt2359704",  # JoJo's Bizarre Adventure
+        "tt9023074",  # Basilisk
+        "tt0290223",  # InuYasha
+        "tt0095327",  # Grave of the Fireflies
     ],
 }
 

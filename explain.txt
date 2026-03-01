@@ -178,3 +178,27 @@ CONCEPT 7: VoidCallback (onRefresh)
   This is called "Separation of Concerns":
     - The card DISPLAYS. That's its only job.
     - main.dart DRIVES. That's its only job.
+
+================================================================================
+PROJECT INVENTORY: THE BLUEPRINT OF "THE ONE"
+================================================================================
+
+--- BACKEND (PYTHON) ---
+api.py          -> THE MANAGER: Defines the FastAPI endpoints (The Gateway for the phone).
+database.py     -> THE ACCOUNTANT: Direct SQL logic for saving/loading from movies.db.
+main.py         -> THE RESEARCHER: Contains the OMDb API search logic for actual movie data.
+movies_data.py  -> THE INVENTORY: The main source of truth for movie IDs and Vibe categories.
+movies.db       -> THE STORAGE: The persistent SQLite file where your Discards live.
+
+--- FRONTEND (DART/FLUTTER) ---
+lib/main.dart               -> THE CONTROL TOWER: The entry point, Sidebar, and core App Logic.
+lib/api_service.dart        -> THE BRIDGE: Connects Flutter to Python via HTTP requests.
+lib/models/movie.dart       -> THE BLUEPRINT: Defines the structure of a "Movie" object in code.
+lib/widgets/movie_card.dart -> THE ARTIST: Pure UI widget for displaying a single movie's face.
+lib/screens/discarded_movies_page.dart -> THE RECOVERY: The screen for restoring swiped movies.
+
+--- THE BRAIN (DOCUMENTATION) ---
+MISSION.md      -> THE ROADMAP: Your living task log and Mentor-given challenges.
+explain.txt     -> THE DICTIONARY: This file! A glossary of architectural concepts.
+README.md       -> THE MANUAL: Setup instructions and project overview.
+

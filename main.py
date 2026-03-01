@@ -22,11 +22,11 @@ base_url = "http://www.omdbapi.com/"
 
 def fetch_movie_by_ID(id: str):
     """
-    Fetch movie data from OMDB API by title
+    Fetch movie data from OMDB API by id
     
     Parameters you need to send to OMDB:
     - apikey: your API key
-    - t: the movie title (e.g., "Inception")
+    - id: the movie ID (e.g., "tt0068646")
     
     Returns the JSON response from OMDB
     """

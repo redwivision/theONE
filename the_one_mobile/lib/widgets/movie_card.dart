@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import '../models/movie.dart';
 
-class MovieCard extends StatelessWidget {
+class MovieCard extends StatefulWidget {
   final Movie movie;
   final VoidCallback onRefresh;
 
   const MovieCard({super.key, required this.movie, required this.onRefresh});
 
   @override
+  State<MovieCard> createState() => _MovieCardState();
+}
+
+class _MovieCardState extends State<MovieCard> {
+  bool _isExpanded = false;
+  @override
   Widget build(BuildContext context) {
-    final details = movie.details;
+    final details = widget.movie.details;
     final bool isSeries = details.type.toLowerCase() == 'series';
     final String durationLabel = isSeries
         ? '${details.totalseason} Season${details.totalseason == "1" ? "" : "s"}'
@@ -86,7 +92,7 @@ class MovieCard extends StatelessWidget {
                     const SizedBox(width: 14),
                     // Refresh Button
                     GestureDetector(
-                      onTap: onRefresh,
+                      onTap: widget.onRefresh,
                       child: Container(
                         padding: const EdgeInsets.all(7),
                         decoration: BoxDecoration(
@@ -185,15 +191,24 @@ class MovieCard extends StatelessWidget {
           // --- Plot ---
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 16, 20, 22),
-            child: Text(
-              details.plot,
-              style: const TextStyle(
-                color: Color(0xFFAAAAAA),
-                fontSize: 14,
-                height: 1.6,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _isExpanded = true;
+                });
+              },
+              child: Text(
+                details.plot,
+                style: const TextStyle(
+                  color: Color(0xFFAAAAAA),
+                  fontSize: 14,
+                  height: 1.6,
+                ),
+                maxLines: _isExpanded ? null : 4,
+                overflow: _isExpanded
+                    ? TextOverflow.visible
+                    : TextOverflow.ellipsis,
               ),
-              maxLines: 4,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
