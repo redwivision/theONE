@@ -3,6 +3,7 @@ import 'api_service.dart';
 import 'models/movie.dart';
 import 'widgets/movie_card.dart';
 import 'screens/discarded_movies_page.dart';
+import 'widgets/movie_card_shimmer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -75,32 +76,48 @@ class _HomePageState extends State<HomePage> {
             future: _movieFuture,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator(
-                  color: Color(0xFF6C63FF),
-                );
+                return MovieCardShimmer();
               } else if (snapshot.hasError) {
+                final errorMsg = snapshot.error.toString();
+                final isNoMoreMovies = errorMsg.contains('No more movies');
+
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
-                      Icons.wifi_off_rounded,
-                      color: Color(0xFFFF6584),
-                      size: 48,
+                    // 2. Change the Icon dynamically!
+                    Icon(
+                      isNoMoreMovies
+                          ? Icons.auto_awesome_rounded
+                          : Icons.wifi_off_rounded,
+                      color: const Color(0xFFFF6584),
+                      size: 64,
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Could not connect to server.',
-                      style: TextStyle(color: Color(0xFFAAAAAA)),
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton.icon(
-                      onPressed: _refresh,
-                      icon: const Icon(Icons.refresh_rounded),
-                      label: const Text('Retry'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF6C63FF),
+                    // 3. Change the Text dynamically!
+                    Text(
+                      isNoMoreMovies
+                          ? "YOU'VE SEEN IT ALL! 🎬"
+                          : "CONNECTION ERROR",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                    const SizedBox(height: 8),
+                    Text(
+                      isNoMoreMovies
+                          ? "Try a different vibe in the sidebar."
+                          : "Check your server or internet.",
+                      style: const TextStyle(color: Colors.white38),
+                    ),
+                    // 4. Hide the Retry button if there are actually no movies left
+                    if (!isNoMoreMovies) ...[
+                      const SizedBox(height: 24),
+                      ElevatedButton(
+                        onPressed: _refresh,
+                        child: const Text("RETRY"),
+                      ),
+                    ],
                   ],
                 );
               } else if (snapshot.hasData) {
@@ -108,10 +125,10 @@ class _HomePageState extends State<HomePage> {
                   child: Dismissible(
                     key: Key(snapshot.data!.id),
                     onDismissed: (direction) {
-                      if (direction == DismissDirection.endToStart) {
+                      if (direction == DismissDirection.startToEnd) {
                         _discardMovie(snapshot.data!.id);
                       }
-                      if (direction == DismissDirection.startToEnd) {
+                      if (direction == DismissDirection.endToStart) {
                         _refresh();
                       }
                     },

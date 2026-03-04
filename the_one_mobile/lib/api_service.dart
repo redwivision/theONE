@@ -11,7 +11,11 @@ class ApiService {
     final response = await http.get(Uri.parse('$baseUrl/recommend/vibes?vibes=$vibe'));
     if (response.statusCode == 200) {
       return Movie.fromJson(jsonDecode(response.body));
-    } else {
+    }
+    else if (response.statusCode == 404) {
+      throw Exception(jsonDecode(response.body)['detail']);
+    }
+    else {
       throw Exception('Failed to load movie');
     }
   }

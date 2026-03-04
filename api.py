@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import sqlite3
 from database import is_movie_discarded, get_discarded_movies as db_get_discarded, discard_movie as db_discard_movie, create_table, remove_from_discarded as db_remove_from_discarded
 from pydantic import BaseModel
@@ -22,7 +22,7 @@ def home():
 @app.get("/recommend/vibes")
 def get_movie(vibes: str = "random"):
     if vibes not in VIBE_LISTS:
-        return {"message": "Vibe not found"}
+        raise HTTPException(status_code=404, detail="Vibe not found")
     
     # Extract just the IDs from the database result tuples [(id, title), ...]
     discarded_list = db_get_discarded(conn)
@@ -31,7 +31,7 @@ def get_movie(vibes: str = "random"):
     movie_id = get_random_movie(vibes, discarded_ids)
     
     if not movie_id:
-        return {"message": "No more movies in this vibe! Try another one."}
+        raise HTTPException(status_code=404, detail="No more movies in this vibe! Try another one.")
         
     movie_details = fetch_movie_by_ID(movie_id)
     
@@ -47,7 +47,7 @@ def get_movie(vibes: str = "random"):
         retries += 1
 
     if movie_details.get("Response") == "False":
-        return {"message": "Could not find a valid movie. Please check your data or API key."}
+        raise HTTPException(status_code=404, detail="Could not find a valid movie. Please check your data or API key.")
     
     return {"movie_id": movie_id, "movie_details": movie_details}
     
