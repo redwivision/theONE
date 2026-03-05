@@ -21,36 +21,30 @@ def home():
 
 @app.get("/recommend/vibes")
 def get_movie(vibes: str = "random"):
-    if vibes not in VIBE_LISTS:
-        raise HTTPException(status_code=404, detail="Vibe not found")
+    discarded_rows = db_get_discarded(conn)
+    discarded_ids = [row[0] for row in discarded_rows]
     
-    # Extract just the IDs from the database result tuples [(id, title), ...]
-    discarded_list = db_get_discarded(conn)
-    discarded_ids = [row[0] for row in discarded_list] if discarded_list else []
-    
-    movie_id = get_random_movie(vibes, discarded_ids)
-    
-    if not movie_id:
-        raise HTTPException(status_code=404, detail="No more movies in this vibe! Try another one.")
-        
-    movie_details = fetch_movie_by_ID(movie_id)
-    
-    # Senior Fix: If the movie is broken, keep trying different ones
-    bad_ids = []
-    retries = 0
-    while movie_details.get("Response") == "False" and retries < 10:
-        bad_ids.append(movie_id)
-        movie_id = get_random_movie(vibes, discarded_ids + bad_ids)
+    movies = []
+    while len(movies) < 5:
+        movie_id = get_random_movie(vibes, discarded_ids)
+
         if not movie_id:
             break
+        
         movie_details = fetch_movie_by_ID(movie_id)
-        retries += 1
-
-    if movie_details.get("Response") == "False":
-        raise HTTPException(status_code=404, detail="Could not find a valid movie. Please check your data or API key.")
+        if movie_details.get("Response") == "True":
+            movies.append(
+                {
+                    "movie_id": movie_id,
+                    "details": movie_details
+                }
+            )
+            discarded_ids.append(movie_id)
+        
+        if not movies:
+            raise HTTPException(status_code=404, detail="No more movies in this vibe")
     
-    return {"movie_id": movie_id, "movie_details": movie_details}
-    
+    return movies
     
 
 @app.post("/discard/{movie_id}")
