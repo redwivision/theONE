@@ -22,15 +22,19 @@ def home():
 @app.get("/recommend/vibes")
 def get_movie(vibes: str = "random"):
     discarded_rows = db_get_discarded(conn)
-    discarded_ids = [row[0] for row in discarded_rows]
+    # Use a set to track discarded IDs and movies picked in this session
+    excluded_ids = {row[0] for row in discarded_rows}
     
     movies = []
+    retryCount = 0
     while len(movies) < 5:
-        movie_id = get_random_movie(vibes, discarded_ids)
+        movie_id = get_random_movie(vibes, excluded_ids)
 
         if not movie_id:
+            # No more movies available in this vibe
             break
         
+        excluded_ids.add(movie_id)
         movie_details = fetch_movie_by_ID(movie_id)
         if movie_details.get("Response") == "True":
             movies.append(
@@ -39,11 +43,13 @@ def get_movie(vibes: str = "random"):
                     "details": movie_details
                 }
             )
-            discarded_ids.append(movie_id)
-        
-        if not movies:
-            raise HTTPException(status_code=404, detail="No more movies in this vibe")
-    
+        else:
+            retryCount += 1
+            if retryCount > 10:
+                break
+    if not movies:
+        raise HTTPException(status_code=404, detail="No more movies in this vibe")
+            
     return movies
     
 
