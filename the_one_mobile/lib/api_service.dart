@@ -7,10 +7,10 @@ class ApiService {
   final String baseUrl = 'http://10.139.104.190:8000';
   
 
-  Future<Movie> getMovie({String vibe = "random"}) async {
+  Future<List<Movie>> getMovie({String vibe = "random"}) async {
     final response = await http.get(Uri.parse('$baseUrl/recommend/vibes?vibes=$vibe'));
     if (response.statusCode == 200) {
-      return Movie.fromJson(jsonDecode(response.body));
+      return List<Movie>.from(jsonDecode(response.body).map((x) => Movie.fromJson(x)));
     }
     else if (response.statusCode == 404) {
       throw Exception(jsonDecode(response.body)['detail']);

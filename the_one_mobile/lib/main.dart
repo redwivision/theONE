@@ -29,18 +29,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<Movie> _movieFuture;
   String _selectedVibe = "random";
+  List<Movie> _movies = [];
+
 
   @override
   void initState() {
     super.initState();
-    _movieFuture = ApiService().getMovie();
+    _movies.add(ApiService().getMovie(vibe: _selectedVibe));
   }
+
 
   void _refresh() {
     setState(() {
-      _movieFuture = ApiService().getMovie(vibe: _selectedVibe);
+      _movies.add(ApiService().getMovie(vibe: _selectedVibe));
     });
   }
 
@@ -72,8 +74,8 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SafeArea(
         child: Center(
-          child: FutureBuilder<Movie>(
-            future: _movieFuture,
+          child: FutureBuilder<List<Movie>>(
+            future: _movies,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return MovieCardShimmer();
@@ -121,22 +123,25 @@ class _HomePageState extends State<HomePage> {
                   ],
                 );
               } else if (snapshot.hasData) {
-                return SingleChildScrollView(
-                  child: Dismissible(
-                    key: Key(snapshot.data!.id),
-                    onDismissed: (direction) {
-                      if (direction == DismissDirection.startToEnd) {
-                        _discardMovie(snapshot.data!.id);
-                      }
-                      if (direction == DismissDirection.endToStart) {
-                        _refresh();
-                      }
-                    },
-                    child: MovieCard(
-                      movie: snapshot.data!,
-                      onRefresh: _refresh,
-                    ),
-                  ),
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    return Dismissible(
+                      key: Key(snapshot.data![index].id),
+                      onDismissed: (direction) {
+                        if (direction == DismissDirection.startToEnd) {
+                          _discardMovie(snapshot.data![index].id);
+                        }
+                        if (direction == DismissDirection.endToStart) {
+                          _refresh();
+                        }
+                      },
+                      child: MovieCard(
+                        movie: snapshot.data![index],
+                        onRefresh: _refresh,
+                      ),
+                    );
+                  },
                 );
               }
               return const SizedBox.shrink();

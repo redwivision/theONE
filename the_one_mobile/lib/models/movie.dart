@@ -7,7 +7,7 @@ class Movie {
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
       id: json['movie_id'], 
-      details: MovieDetails.fromJson(json['movie_details'])
+      details: MovieDetails.fromJson(json['details'])
     );
   }
 
