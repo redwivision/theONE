@@ -30,25 +30,40 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String _selectedVibe = "random";
+  bool _isLoading = false;
   List<Movie> _movies = [];
-
 
   @override
   void initState() {
     super.initState();
-    _movies.add(ApiService().getMovie(vibe: _selectedVibe));
+    _loadBatch();
   }
 
+  // The Batch Loader: awaits OUTSIDE setState, then assigns the result
+  Future<void> _loadBatch() async {
+    setState(() => _isLoading = true);
+    try {
+      final result = await ApiService().getMovie(vibe: _selectedVibe);
+      setState(() {
+        _movies = result; // Assign the full list, don't .add()
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() => _isLoading = false);
+      // Error is stored in the catch — we can surface it if needed
+    }
+  }
 
   void _refresh() {
-    setState(() {
-      _movies.add(ApiService().getMovie(vibe: _selectedVibe));
-    });
+    _loadBatch(); // _loadBatch already calls setState internally
   }
 
   Future<void> _discardMovie(String movieId) async {
-    await ApiService().discardMovie(movieId);
-    _refresh();
+    await ApiService().discardMovie(movieId); // Tell the backend
+    setState(
+      () => _movies.removeWhere((m) => m.id == movieId),
+    ); // Remove locally
+    if (_movies.isEmpty) _loadBatch(); // Auto-reload when feed runs out
   }
 
   @override
@@ -73,81 +88,54 @@ class _HomePageState extends State<HomePage> {
         ), // Makes the ☰ icon Purple
       ),
       body: SafeArea(
-        child: Center(
-          child: FutureBuilder<List<Movie>>(
-            future: _movies,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return MovieCardShimmer();
-              } else if (snapshot.hasError) {
-                final errorMsg = snapshot.error.toString();
-                final isNoMoreMovies = errorMsg.contains('No more movies');
-
-                return Column(
+        child: _isLoading
+            ? const Center(child: MovieCardShimmer())
+            : _movies.isEmpty
+            ? Center(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // 2. Change the Icon dynamically!
-                    Icon(
-                      isNoMoreMovies
-                          ? Icons.auto_awesome_rounded
-                          : Icons.wifi_off_rounded,
-                      color: const Color(0xFFFF6584),
+                    const Icon(
+                      Icons.auto_awesome_rounded,
+                      color: Color(0xFFFF6584),
                       size: 64,
                     ),
                     const SizedBox(height: 16),
-                    // 3. Change the Text dynamically!
-                    Text(
-                      isNoMoreMovies
-                          ? "YOU'VE SEEN IT ALL! 🎬"
-                          : "CONNECTION ERROR",
-                      style: const TextStyle(
+                    const Text(
+                      "YOU'VE SEEN IT ALL! 🎬",
+                      style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      isNoMoreMovies
-                          ? "Try a different vibe in the sidebar."
-                          : "Check your server or internet.",
-                      style: const TextStyle(color: Colors.white38),
+                    const Text(
+                      "Try a different vibe in the sidebar.",
+                      style: TextStyle(color: Colors.white38),
                     ),
-                    // 4. Hide the Retry button if there are actually no movies left
-                    if (!isNoMoreMovies) ...[
-                      const SizedBox(height: 24),
-                      ElevatedButton(
-                        onPressed: _refresh,
-                        child: const Text("RETRY"),
-                      ),
-                    ],
                   ],
-                );
-              } else if (snapshot.hasData) {
-                return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    return Dismissible(
-                      key: Key(snapshot.data![index].id),
-                      onDismissed: (direction) {
-                        if (direction == DismissDirection.startToEnd) {
-                          _discardMovie(snapshot.data![index].id);
-                        }
-                        if (direction == DismissDirection.endToStart) {
-                          _refresh();
-                        }
-                      },
-                      child: MovieCard(
-                        movie: snapshot.data![index],
-                        onRefresh: _refresh,
-                      ),
-                    );
-                  },
-                );
-              }
-              return const SizedBox.shrink();
-            },
-          ),
-        ),
+                ),
+              )
+            : ListView.builder(
+                itemCount: _movies.length,
+                itemBuilder: (context, index) {
+                  return Dismissible(
+                    key: Key(_movies[index].id),
+                    onDismissed: (direction) {
+                      if (direction == DismissDirection.startToEnd) {
+                        _discardMovie(_movies[index].id);
+                      }
+                      if (direction == DismissDirection.endToStart) {
+                        _refresh();
+                      }
+                    },
+                    child: MovieCard(
+                      movie: _movies[index],
+                      onRefresh: _refresh,
+                    ),
+                  );
+                },
+              ),
       ),
       drawer: Drawer(
         backgroundColor: const Color(
