@@ -23,6 +23,11 @@ class _WatchlistPageState extends State<WatchlistPage> {
     });
   }
 
+  void _removeFromWatchlist(String id) async {
+    await ApiService().removeFromWatchlist(id);
+    _refresh();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,10 +81,7 @@ class _WatchlistPageState extends State<WatchlistPage> {
                   ),
                   trailing: IconButton(
                     icon: const Icon(Icons.restore, color: Color(0xFF6C63FF)),
-                    onPressed: () async {
-                      await ApiService().undiscardMovie(id);
-                      _refresh(); // 🔄 Re-fetches the list
-                    },
+                    onPressed: () => _removeFromWatchlist(id),
                   ),
                 );
               },
@@ -87,7 +89,7 @@ class _WatchlistPageState extends State<WatchlistPage> {
           } else {
             return const Center(
               child: Text(
-                'No discarded movies yet. 🗑️',
+                'No movies in your watchlist yet.',
                 style: TextStyle(color: Colors.white38, fontSize: 16),
               ),
             );
