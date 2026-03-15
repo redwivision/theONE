@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.list_alt, color: Colors.white38),
+              leading: const Icon(Icons.list_alt_rounded, color: Colors.white38),
               title: const Text(
                 'Watchlist',
                 style: TextStyle(color: Colors.white70, fontSize: 16),

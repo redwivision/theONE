@@ -9,23 +9,38 @@ class WatchlistPage extends StatefulWidget {
 }
 
 class _WatchlistPageState extends State<WatchlistPage> {
-  late Future<List<dynamic>> _watchlistFuture;
+  bool _isLoading = false;
+  List<dynamic> _watchlist = [];
 
   @override
   void initState() {
     super.initState();
-    _refresh();
+    _loadwatchlist();
   }
 
-  void _refresh() {
+  void _loadwatchlist()
+    async {
     setState(() {
-      _watchlistFuture = ApiService().getWatchlist();
+      _isLoading = true;
     });
+    try {
+      final watchlist = await ApiService().getWatchlist();
+      setState(() {
+        _watchlist = watchlist;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
+
+
 
   void _removeFromWatchlist(String id) async {
     await ApiService().removeFromWatchlist(id);
-    _refresh();
+    _loadwatchlist();
   }
 
   @override
@@ -46,54 +61,36 @@ class _WatchlistPageState extends State<WatchlistPage> {
         ),
         iconTheme: const IconThemeData(color: Color(0xFF6C63FF)),
       ),
-      body: FutureBuilder<List<dynamic>>(
-        future: _watchlistFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(color: Color(0xFF6C63FF)),
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                'Error: ${snapshot.error}',
-                style: const TextStyle(color: Colors.white70),
+      body: _isLoading ? const Center(
+        child: CircularProgressIndicator(color: Color(0xFF6C63FF)),
+      ) : _watchlist.isEmpty ? const Center(
+        child: Text(
+          'No movies in your watchlist yet.',
+          style: TextStyle(color: Colors.white38, fontSize: 16),
+        ),
+      ) : ListView.builder(
+        itemCount: _watchlist.length,
+        itemBuilder: (context, index) {
+          final movie = _watchlist[index];
+          final id = movie[0];
+          final title = movie[1];
+          return ListTile(
+            title: Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
-            );
-          } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final movie = snapshot.data![index];
-                final id = movie[0];
-                final title = movie[1];
-                return ListTile(
-                  title: Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(
-                    id,
-                    style: const TextStyle(color: Colors.white38),
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.restore, color: Color(0xFF6C63FF)),
-                    onPressed: () => _removeFromWatchlist(id),
-                  ),
-                );
-              },
-            );
-          } else {
-            return const Center(
-              child: Text(
-                'No movies in your watchlist yet.',
-                style: TextStyle(color: Colors.white38, fontSize: 16),
-              ),
-            );
-          }
+            ),
+            subtitle: Text(
+              id,
+              style: const TextStyle(color: Colors.white38),
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.delete, color: Color(0xFF6C63FF)),
+              onPressed: () => _removeFromWatchlist(id),
+            ),
+          );
         },
       ),
     );
