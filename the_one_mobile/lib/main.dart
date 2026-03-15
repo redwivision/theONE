@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'api_service.dart';
 import 'models/movie.dart';
 import 'widgets/movie_card.dart';
-import 'screens/discarded_movies_page.dart';
-import 'screens/watchlist_page.dart';
+import 'screens/saved_movies_page.dart';
 import 'widgets/movie_card_shimmer.dart';
 
 void main() {
@@ -33,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   String _selectedVibe = "random";
   bool _isLoading = false;
   List<Movie> _movies = [];
+  String? _errorMessage;
 
   @override
   void initState() {
@@ -42,16 +42,21 @@ class _HomePageState extends State<HomePage> {
 
   // The Batch Loader: awaits OUTSIDE setState, then assigns the result
   Future<void> _loadBatch() async {
-    setState(() => _isLoading = true);
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null; // Reset error on retry
+    });
     try {
       final result = await ApiService().getMovie(vibe: _selectedVibe);
       setState(() {
-        _movies = result; // Assign the full list, don't .add()
+        _movies = result;
         _isLoading = false;
       });
     } catch (e) {
-      setState(() => _isLoading = false);
-      // Error is stored in the catch — we can surface it if needed
+      setState(() {
+        _errorMessage = e.toString();
+        _isLoading = false;
+      });
     }
   }
 
@@ -99,6 +104,42 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: _isLoading
             ? const Center(child: MovieCardShimmer())
+            : _errorMessage != null
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.wifi_off_rounded,
+                      color: Color(0xFFFF6584),
+                      size: 64,
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      "CONNECTION ERROR",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      _errorMessage!,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: Colors.white38),
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                      onPressed: _loadBatch,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF6C63FF),
+                        foregroundColor: Colors.white,
+                      ),
+                      child: const Text("RETRY"),
+                    ),
+                  ],
+                ),
+              )
             : _movies.isEmpty
             ? Center(
                 child: Column(
@@ -206,13 +247,22 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const DiscardedMoviesPage(),
+                    builder: (context) => SavedMoviesPage(
+                      title: "Discarded",
+                      emptyMessage: "No discarded movies yet. 🗑️",
+                      actionIcon: Icons.restore,
+                      fetchData: ApiService().getDiscardedMovies,
+                      onAction: ApiService().undiscardMovie,
+                    ),
                   ),
                 );
               },
             ),
             ListTile(
-              leading: const Icon(Icons.list_alt_rounded, color: Colors.white38),
+              leading: const Icon(
+                Icons.list_alt_rounded,
+                color: Colors.white38,
+              ),
               title: const Text(
                 'Watchlist',
                 style: TextStyle(color: Colors.white70, fontSize: 16),
@@ -222,7 +272,13 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const WatchlistPage(),
+                    builder: (context) => SavedMoviesPage(
+                      title: "Watchlist",
+                      emptyMessage: "Nothing in your watchlist yet. ⭐",
+                      actionIcon: Icons.delete,
+                      fetchData: ApiService().getWatchlist,
+                      onAction: ApiService().removeFromWatchlist,
+                    ),
                   ),
                 );
               },
