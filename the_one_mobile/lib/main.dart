@@ -14,9 +14,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      title: 'THE ONE',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(
+          0xFF0D0D1A,
+        ), // Matches our dark aesthetic
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        // This is the "Engine Room" for smooth transitions 🔮
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          },
+        ),
+      ),
+      home: const HomePage(),
     );
   }
 }
