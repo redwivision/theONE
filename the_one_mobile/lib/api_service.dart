@@ -42,5 +42,29 @@ class ApiService {
       throw Exception('Failed to undiscard movie');
     }
   }
+
+  Future<void> addToWatchlist(String movieId) async {
+    final response = await http.post(Uri.parse('$baseUrl/watchlist/$movieId'));
+    if (response.statusCode != 200) {
+      throw Exception('Failed to add movie to watchlist');
+    }
+  }
+
+  Future<List<dynamic>> getWatchlist() async {
+    final response = await http.get(Uri.parse('$baseUrl/watchlist/'));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to load watchlist');
+    }
+  }
+
+  Future<void> removeFromWatchlist(String movieId) async {
+    final response = await http.delete(Uri.parse('$baseUrl/watchlist/$movieId'));
+    if (response.statusCode != 200) {
+      throw Exception('Failed to remove movie from watchlist');
+    }
+  }
 }
+
 

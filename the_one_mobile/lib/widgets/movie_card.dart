@@ -174,14 +174,33 @@ class _MovieCardState extends State<MovieCard> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 14),
-            child: Text(
-              details.year,
-              style: const TextStyle(
-                color: Color(0xFF888888),
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+            padding: const EdgeInsets.fromLTRB(20, 4, 20, 14),
+            child: Row(
+              children: [
+                Text(
+                  details.year,
+                  style: const TextStyle(
+                    color: Color(0xFF888888),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                const Icon(
+                  Icons.star_rounded,
+                  color: Color(0xFFFFD700),
+                  size: 16,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  details.imdbRating ?? "N/A",
+                  style: const TextStyle(
+                    color: Color(0xFFFFD700),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
             ),
           ),
 

@@ -21,8 +21,9 @@ class MovieDetails {
   String type;
   String runtime;
   String totalseason;
+  String? imdbRating;
 
-  MovieDetails({required this.title, required this.year, required this.posterUrl, required this.plot, required this.type, required this.runtime, required this.totalseason});
+  MovieDetails({required this.title, required this.year, required this.posterUrl, required this.plot, required this.type, required this.runtime, required this.totalseason, required this.imdbRating});
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) {
     return MovieDetails(
@@ -33,6 +34,7 @@ class MovieDetails {
       type: json['Type'] ?? "N/A",
       runtime: json['Runtime'] ?? "N/A",
       totalseason: json['totalSeasons'] ?? "N/A",
+      imdbRating: json['imdbRating'] ?? "N/A",
     );
   }
 }

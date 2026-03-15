@@ -51,8 +51,39 @@ def remove_from_discarded(conn, movie_id):
         print(e)
         return False
 
+def add_to_watchList(conn, movie_id, movie_title):
+    try:
+        c = conn.cursor()
+        c.execute("INSERT OR IGNORE INTO watchList (id, title) VALUES (?, ?)", (movie_id, movie_title))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(e)
 
-
+def get_watchList(conn):
+    try:
+        c = conn.cursor()
+        c.execute("SELECT * FROM watchList")
+        return c.fetchall()
+    except sqlite3.Error as e:
+        print(e)
+        return False
+def remove_from_watchList(conn, movie_id):
+    try:
+        c = conn.cursor()
+        c.execute("DELETE FROM watchList WHERE id = ?", (movie_id,))
+        conn.commit()
+        return True
+    except sqlite3.Error as e:
+        print(e)
+        return False
+def is_movie_in_watchlist(conn, movie_id):
+    try:
+        c = conn.cursor()
+        c.execute("SELECT * FROM watchList WHERE id = ?", (movie_id,))
+        return c.fetchone() is not None
+    except sqlite3.Error as e:
+        print(e)
+        return False
 if __name__ == "__main__":
     conn = create_connection('movies.db')
 

@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 import sqlite3
-from database import is_movie_discarded, get_discarded_movies as db_get_discarded, discard_movie as db_discard_movie, create_table, remove_from_discarded as db_remove_from_discarded
+from database import is_movie_discarded, get_discarded_movies as db_get_discarded, discard_movie as db_discard_movie, create_table, remove_from_discarded as db_remove_from_discarded, get_watchList, add_to_watchList, remove_from_watchList as db_remove_from_watchlist, is_movie_in_watchlist
 from pydantic import BaseModel
 from movies_data import VIBE_LISTS, get_random_movie
 from main import fetch_movie_by_ID
@@ -12,6 +12,7 @@ class Movie(BaseModel):
 conn = sqlite3.connect('movies.db', check_same_thread=False)
 # Initialize the table when the server starts
 create_table(conn, "CREATE TABLE IF NOT EXISTS discards (id TEXT PRIMARY KEY, title TEXT)")
+create_table(conn, "CREATE TABLE IF NOT EXISTS watchList (id TEXT PRIMARY KEY, title TEXT)")
 
 app = FastAPI()
 
@@ -78,3 +79,27 @@ def remove_from_discarded_endpoint(movie_id: str):
             return {"message": "Movie removed from discarded list successfully"}
         else:
             return {"message": "Failed to remove movie from discarded list"}
+
+@app.post("/watchlist/{movie_id}")
+def add_to_watchlist_endpoint(movie_id: str):
+    if is_movie_in_watchlist(conn, movie_id):
+        return {"message": "Movie already in watchlist"}
+    else:
+        details = fetch_movie_by_ID(movie_id)
+        title = details.get("Title", f"Unknown ({movie_id})")
+        add_to_watchList(conn, movie_id, title)
+        return {"message": "Movie added to watchlist successfully", "title": title}
+
+@app.get("/watchlist/")
+def watchlist_endpoint():
+    return get_watchList(conn)
+
+@app.delete("/watchlist/{movie_id}")
+def remove_from_watchlist_endpoint(movie_id: str):
+    if not is_movie_in_watchlist(conn, movie_id):
+        return {"message": "Movie not found in watchlist"}
+    else:
+        if db_remove_from_watchlist(conn, movie_id):
+            return {"message": "Movie removed from watchlist successfully"}
+        else:
+            return {"message": "Failed to remove movie from watchlist"}

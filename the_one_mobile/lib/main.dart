@@ -3,6 +3,7 @@ import 'api_service.dart';
 import 'models/movie.dart';
 import 'widgets/movie_card.dart';
 import 'screens/discarded_movies_page.dart';
+import 'screens/watchlist_page.dart';
 import 'widgets/movie_card_shimmer.dart';
 
 void main() {
@@ -60,6 +61,14 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _discardMovie(String movieId) async {
     await ApiService().discardMovie(movieId); // Tell the backend
+    setState(
+      () => _movies.removeWhere((m) => m.id == movieId),
+    ); // Remove locally
+    if (_movies.isEmpty) _loadBatch(); // Auto-reload when feed runs out
+  }
+
+  Future<void> _addToWatchlist(String movieId) async {
+    await ApiService().addToWatchlist(movieId); // Tell the backend
     setState(
       () => _movies.removeWhere((m) => m.id == movieId),
     ); // Remove locally
@@ -126,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                         _discardMovie(_movies[index].id);
                       }
                       if (direction == DismissDirection.endToStart) {
-                        _refresh();
+                        _addToWatchlist(_movies[index].id);
                       }
                     },
                     child: MovieCard(
@@ -198,6 +207,22 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const DiscardedMoviesPage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.list_alt, color: Colors.white38),
+              title: const Text(
+                'Watchlist',
+                style: TextStyle(color: Colors.white70, fontSize: 16),
+              ),
+              onTap: () {
+                Navigator.pop(context); // 🚪 Close drawer first
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WatchlistPage(),
                   ),
                 );
               },
