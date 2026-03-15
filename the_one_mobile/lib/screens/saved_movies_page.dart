@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
+/// A reusable, generic page for displaying lists of movies (e.g., Watchlist or Discarded).
+/// It uses "Dependency Injection" by receiving its data-fetching and action-handling logic
+/// through the constructor, making it agnostic to *what* data it actually displays.
 class SavedMoviesPage extends StatefulWidget {
-  final String title;
-  final String emptyMessage;
-  final IconData actionIcon;
-  final Future<List<dynamic>> Function() fetchData;
-  final Future<void> Function(String) onAction;
+  final String title; // Header title (e.g., "Watchlist")
+  final String emptyMessage; // Message shown when the list is empty
+  final IconData
+  actionIcon; // The icon for the trailing button in each list item
+
+  // These are the "Engine" functions — passed from main.dart
+  final Future<List<dynamic>> Function() fetchData; // Function to get the list
+  final Future<void> Function(String)
+  onAction; // Function to handle the button tap
 
   const SavedMoviesPage({
     super.key,
