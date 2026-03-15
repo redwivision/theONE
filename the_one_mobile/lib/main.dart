@@ -186,17 +186,102 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return Dismissible(
                     key: Key(_movies[index].id),
+                    // --- SWIPE GESTURE LOGIC: START ---
+                    // Swipe Right (Start to End) = Save to Watchlist
+                    // Swipe Left (End to Start)  = Discard
                     onDismissed: (direction) {
                       if (direction == DismissDirection.startToEnd) {
-                        _discardMovie(_movies[index].id);
+                        _addToWatchlist(
+                          _movies[index].id,
+                        ); // Right Swipe = Save
                       }
                       if (direction == DismissDirection.endToStart) {
-                        _addToWatchlist(_movies[index].id);
+                        _discardMovie(_movies[index].id); // Left Swipe = Trash
                       }
                     },
-                    child: MovieCard(
-                      movie: _movies[index],
-                      onRefresh: _refresh,
+                    // --- ENTRANCE ANIMATION: Subtle slide-up + fade ---
+                    // This makes the cards feel like they are floating into view
+                    child: TweenAnimationBuilder<double>(
+                      duration: const Duration(milliseconds: 600),
+                      curve: Curves.easeOutCubic,
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      builder: (context, value, child) {
+                        return Opacity(
+                          opacity: value,
+                          child: Transform.translate(
+                            offset: Offset(0, 30 * (1 - value)),
+                            child: child,
+                          ),
+                        );
+                      },
+                      child: MovieCard(
+                        movie: _movies[index],
+                        onRefresh: _refresh,
+                      ),
+                    ),
+                    // --- BACKGROUND (SWIPE RIGHT): WATCHLIST ---
+                    background: Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: 30),
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.bookmark_add_rounded,
+                            color: Colors.green,
+                            size: 32,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            "WATCHLIST",
+                            style: TextStyle(
+                              color: Colors.green.withOpacity(0.8),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // --- SECONDARY BACKGROUND (SWIPE LEFT): DISCARD ---
+                    secondaryBackground: Container(
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.only(right: 30),
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.delete_sweep_rounded,
+                            color: Colors.red,
+                            size: 32,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            "DISCARD",
+                            style: TextStyle(
+                              color: Colors.red.withOpacity(0.8),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },

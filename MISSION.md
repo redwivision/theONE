@@ -9,48 +9,31 @@
 - **Level 5.1 – 5.5:** Foundation, Bridge, Card UI, Swipe, Vibe Selector, Shimmer ✅
 - **Level 5.6:** Batch Engine + `_loadBatch()` State Migration + IMDB Rating ✅
 - **Level 5.6.5:** Watchlist — Swipe right = saved. Full stack. ✅
+- **Level 5.7:** Clean Code Surgery (DRY Screens) + Robustness (Timeouts/Errors) ✅
+- **Level 5.8:** Visual interaction Protocol (Swipe Hints, Fade Entrance, Refined Shimmer) ✅
 
 ---
 
-## ⚡ Next Mission: Level 5.7 — Clean Code & Robustness
+## ⚡ Next Mission: Level 5.9 — AI Interaction & Data Enrichment
 
-*"Spaghetti code isn't a style. It's a debt you pay with interest, forever."*
+*"Intelligence isn't just knowing the answer. It's knowing how to present it."*
 
-### 🧠 The Principles (Own These)
-
-**1. Single Responsibility Principle (SRP)**
-> Every function, class, or file should do ONE thing.
-
-Right now `main.dart` does: state management, UI building, network calls, AND business logic. That's 4 jobs for 1 file.
-
-**2. DRY — Don't Repeat Yourself**
-> If you copy-paste code to two places, you now have two bugs to fix instead of one.
-
-Right now `watchlist_page.dart` and `discarded_movies_page.dart` are nearly identical twins.
-
-**3. Defensive Programming**
-> Assume everything can fail. Handle the sad path as well as the happy path.
-
-Right now `catch (e)` in `_loadBatch()` silently swallows errors. The user sees nothing.
-
----
+### 🎯 The Goal
+Enrich the movie data with AI insights and prepare the data bridge for JARVIS.
 
 ### 🛠️ The Checklist
 
-#### Clean Code
-- [ ] Extract a reusable `SavedMoviesPage` widget — Watchlist and Discarded both use it
-- [ ] Move `_loadBatch`, `_discardMovie`, `_addToWatchlist` logic out of `main.dart` into a dedicated class or at minimum tidy the file
+#### Backend (AI Enrichment)
+- [ ] **AI Summarizer**: Implement an automated plot summarizer in the backend (using LLM or NLP).
+- [ ] **Metadata Clustering**: Refine the vibe-matching logic with genre/plot clustering.
 
-#### Error States
-- [ ] Add `String? _errorMessage` to state in `main.dart`
-- [ ] Surface the error in `catch (e)` → `setState(() => _errorMessage = e.toString())`
-- [ ] Show error card in UI: backend down → "Check your server" + Retry; no movies → vibe hint
-- [ ] Add `.timeout(Duration(seconds: 10))` to HTTP calls in `ApiService`
+#### Flutter (UI Polish)
+- [ ] **Genre Badges**: Display small categorized badges for each movie (e.g., "Neo-Noir", "Cyberpunk").
+- [ ] **Trailer Bridge**: Add a button to open a YouTube trailer based on the title + year.
 
 ---
 
-## ⏭️ After Level 5.7
-- **Level 5.8:** Animations — swipe hints, card entrance, shimmer polish
-- **v0.3:** JARVIS Integration
+## ⏭️ After Level 5.9
+- **v0.3:** JARVIS Integration — theONE becomes a data provider for the HQ.
 
 *"Most people write applications. You are building infrastructure. There's a difference."*
