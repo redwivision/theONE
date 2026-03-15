@@ -1,95 +1,56 @@
 # 🎯 THE ONE — MISSION CONTROL
 
-*"You know what I've learned about systems? They don't fail because they're complex. They fail because someone, somewhere, was too afraid to understand them fully."*
+*"You don't build an empire in a day, Red. You build it one system at a time."*
 
 ---
 
 ## ✅ Completed Phases
-- **Level 5.1 - 5.5:** Foundation, Bridge, Swipe, Vibe Selector, Shimmer. ✅
-- **Level 5.6 (Backend):** Batch Engine — 5 movies per request, retry counter, set-based exclusion. ✅
+
+- **Level 5.1 – 5.5:** Foundation, Bridge, Card UI, Swipe, Vibe Selector, Shimmer ✅
+- **Level 5.6:** Batch Engine + `_loadBatch()` State Migration + IMDB Rating ✅
+- **Level 5.6.5:** Watchlist — Swipe right = saved. Full stack. ✅
 
 ---
 
-## ⚡ Current Mission: Level 5.6 — The State Migration
+## ⚡ Next Mission: Level 5.7 — Clean Code & Robustness
 
-*"Right now, you have two operatives in the field. One is experienced (`_movieFuture`). One is new and unactivated (`_movies`). They don't talk to each other. The mission doesn't end until they do."*
+*"Spaghetti code isn't a style. It's a debt you pay with interest, forever."*
 
-### 🔎 The Diagnosis (Current Bugs)
+### 🧠 The Principles (Own These)
 
-| Bug | Root Cause |
-| :--- | :--- |
-| Discarded card "comes back" | `_discardMovie` removed `_refresh()` but didn't replace it with a local list update |
-| Empty screen after all 5 discarded | No "Load More" trigger exists yet |
-| `_movies` is never used | It's declared but never filled or read by the UI |
+**1. Single Responsibility Principle (SRP)**
+> Every function, class, or file should do ONE thing.
 
----
+Right now `main.dart` does: state management, UI building, network calls, AND business logic. That's 4 jobs for 1 file.
 
-### 🛠️ The Surgery (3 Precise Cuts)
+**2. DRY — Don't Repeat Yourself**
+> If you copy-paste code to two places, you now have two bugs to fix instead of one.
 
-#### Cut 1: Kill `_movieFuture`. Activate `_movies`.
+Right now `watchlist_page.dart` and `discarded_movies_page.dart` are nearly identical twins.
 
-**Delete** `late Future<List<Movie>> _movieFuture;` from state.
+**3. Defensive Programming**
+> Assume everything can fail. Handle the sad path as well as the happy path.
 
-**Replace** `initState` to `await` the batch and store it:
-```
-initState → calls _loadBatch()
-```
-```
-_loadBatch() → async → awaits ApiService().getMovie() → setState(_movies = result)
-```
-
-Add `_isLoading = true` before the fetch and `_isLoading = false` after, so the Shimmer still works.
-
-#### Cut 2: Retrain `_discardMovie`.
-
-After `await ApiService().discardMovie(movieId)`, instead of `_refresh()`, do:
-```
-setState(() => _movies.removeWhere((m) => m.id == movieId))
-```
-This surgically removes ONE item from the local list. No network call. No full reload.
-
-Then: if `_movies.isEmpty` → call `_loadBatch()` to get a fresh batch.
-
-#### Cut 3: Rewire the UI.
-
-**Delete** the `FutureBuilder`. Replace with:
-```
-if (_isLoading) → MovieCardShimmer()
-else if (_movies.isEmpty) → "You've seen it all" screen
-else → ListView.builder(itemCount: _movies.length, ...)
-```
+Right now `catch (e)` in `_loadBatch()` silently swallows errors. The user sees nothing.
 
 ---
 
-## 📡 Data Flow (v0.2 Final)
+### 🛠️ The Checklist
 
-```
-[App Starts / Vibe Changes]
-    │
-    ▼
-_isLoading = true → setState() → Shimmer shows
-    │
-    ▼
-await ApiService().getMovie(vibe: _selectedVibe)
-    │  returns List<Movie>
-    ▼
-_movies = result → _isLoading = false → setState() → ListView shows
+#### Clean Code
+- [ ] Extract a reusable `SavedMoviesPage` widget — Watchlist and Discarded both use it
+- [ ] Move `_loadBatch`, `_discardMovie`, `_addToWatchlist` logic out of `main.dart` into a dedicated class or at minimum tidy the file
 
-[User Swipes to Discard]
-    │
-    ▼
-await ApiService().discardMovie(id)   ← tells the backend
-setState(_movies.removeWhere(...))    ← removes from local list
-    │
-    ├─ _movies still has items → ListView re-renders (shorter)
-    └─ _movies is empty → _loadBatch() → fetch 5 more
-```
+#### Error States
+- [ ] Add `String? _errorMessage` to state in `main.dart`
+- [ ] Surface the error in `catch (e)` → `setState(() => _errorMessage = e.toString())`
+- [ ] Show error card in UI: backend down → "Check your server" + Retry; no movies → vibe hint
+- [ ] Add `.timeout(Duration(seconds: 10))` to HTTP calls in `ApiService`
 
 ---
 
-## ⏭️ What Comes After
-- **Level 5.6.5:** Watchlist — Swipe right = saved. Same pattern as Discards.
-- **Level 5.7:** AI Self-Replenishing Vibe Engine.
-- **v0.3:** JARVIS Integration.
+## ⏭️ After Level 5.7
+- **Level 5.8:** Animations — swipe hints, card entrance, shimmer polish
+- **v0.3:** JARVIS Integration
 
 *"Most people write applications. You are building infrastructure. There's a difference."*
